@@ -21,8 +21,14 @@ public class WordGram {
 	 * @param size Number of elements in WordGram object
 	 */
 	public WordGram(String[] source, int start, int size) {
-		// TODO correctly implement constructor
-		myWords = new String[]{source[start]};
+		//myWords = new String[]{source[start]};
+		myWords = new String[size];
+		for (int i = 0; i < size; i++) {  
+			myWords[i] = source[i + start];
+			//System.out.println("i equals " + i + " length is " + myWords.length);
+		}
+		myToString = "";
+		myHash = 0;
 	}
 
 
@@ -33,8 +39,8 @@ public class WordGram {
 	 * @throws IndexOutOfBoundsException if index < 0 or index >= length()
 	 */
 	public String wordAt(int index) {
-		// TODO correctly implement wordAt
-		return "";
+		String word = myWords[index];
+		return word;
 	}
 
 
@@ -43,8 +49,12 @@ public class WordGram {
 	 * @return order of wordgram, number of words
 	 */
 	public int length() {
-		// TODO correctly implement length 
-		return 0;
+		//int lengthCounter = 0;
+		//for (String word : this.myWords) {
+		//	lengthCounter += 1;
+		//}
+		int length = this.myWords.length;
+		return length;
 	}
 
 
@@ -58,8 +68,15 @@ public class WordGram {
 			return false;
 		}
 		WordGram other = (WordGram) o;
-		// TODO complete correct implementation of equals (above is correct)
-		return false;
+		if (this.myWords.length != other.myWords.length) {
+			return false;
+		}
+		for (int i=0; i < this.myWords.length; i++) {
+			if (! this.myWords[i].equals(other.myWords[i])) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 
@@ -70,8 +87,14 @@ public class WordGram {
 	 */
 	@Override
 	public int hashCode() {
-		// TODO correctly implement hashCode
-		return 0;
+		if (this.myHash != 0) {
+			return this.myHash;
+		}
+		int hash;
+		String allWords = this.toString();
+		hash = allWords.hashCode();
+		this.myHash = hash;
+		return hash;
 	}
 
 
@@ -84,8 +107,22 @@ public class WordGram {
 	 * @return new WordGram
 	 */
 	public WordGram shiftAdd(String last) {
-		// TODO correctly implement shiftAdd
-		return this;
+
+		// build the new String[]
+		int originalLength = this.myWords.length; 				//test; if length is 5	
+		String[] addedWord = new String[originalLength];		// new String array with size of 5 (can do index 0-4)
+		for (int i = 0; i < originalLength-1; i++) {				// this will loop 0, 1, 2, 3
+			addedWord[i] = this.myWords[i+1];					// addedWord [0] = myWords[1] etc. up to 3. 
+		}
+		addedWord[originalLength-1] = last;
+
+		// use new String[] to create the new WordGram object
+		WordGram added = new WordGram(addedWord, 0, addedWord.length);
+
+		// update other saved values of the object
+		added.hashCode();
+		added.toString();
+		return added;
 	}
 
 
@@ -95,7 +132,11 @@ public class WordGram {
 	 */
 	@Override
 	public String toString() {
-		// TODO correctly implement toString
-		return "";
+		if (! this.myToString.equals("")) {
+			return this.myToString;
+		}
+		String together = String.join(" ", this.myWords);
+		this.myToString = together;
+		return together;
 	}
 }

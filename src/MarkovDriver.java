@@ -6,6 +6,7 @@ import java.io.File;
  * random text based on a training text. Prints
  * text and runtime measurements.
  * For use in Compsci 201, Fall 2022, Duke University
+ * @author Chelsea Shoben
  * @author ola
  * @author Brandon Fain
  */
@@ -24,8 +25,8 @@ public class MarkovDriver {
 		String text = TextSource.textFromFile(f);
 
 		// only one line below should be uncommented
-		MarkovInterface generator = new BaseMarkov(MODEL_ORDER);
-		//MarkovInterface generator = new HashMarkov(MODEL_ORDER);
+		//MarkovInterface generator = new BaseMarkov(MODEL_ORDER);
+		MarkovInterface generator = new HashMarkov(MODEL_ORDER);
 		
 		generator.setSeed(RANDOM_SEED);
 
