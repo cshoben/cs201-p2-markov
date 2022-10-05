@@ -21,11 +21,9 @@ public class WordGram {
 	 * @param size Number of elements in WordGram object
 	 */
 	public WordGram(String[] source, int start, int size) {
-		//myWords = new String[]{source[start]};
 		myWords = new String[size];
 		for (int i = 0; i < size; i++) {  
 			myWords[i] = source[i + start];
-			//System.out.println("i equals " + i + " length is " + myWords.length);
 		}
 		myToString = "";
 		myHash = 0;
@@ -112,7 +110,7 @@ public class WordGram {
 		int originalLength = this.myWords.length; 				//test; if length is 5	
 		String[] addedWord = new String[originalLength];		// new String array with size of 5 (can do index 0-4)
 		for (int i = 0; i < originalLength-1; i++) {				// this will loop 0, 1, 2, 3
-			addedWord[i] = this.myWords[i+1];					// addedWord [0] = myWords[1] etc. up to 3. 
+			addedWord[i] = this.myWords[i+1];					// addedWord [0] = myWords[1] etc. up to 4. 
 		}
 		addedWord[originalLength-1] = last;
 
